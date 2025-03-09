@@ -1,0 +1,542 @@
+/* Color Variables */
+:root {
+  --ice-cold: #a0d2eb;
+  --freeze-purple: #e5eaf5;
+  --medium-purple: #d0bdf4;
+  --purple-pain: #8458B3;
+  --heavy-purple: #a28089;
+}
+
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--freeze-purple);
+  color: #333;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main, .site-content {
+  flex: 1;
+}
+
+
+/* Header */
+header {
+  background-color: var(--purple-pain);
+  padding: 12px 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Navigation Styling */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-left a,
+.auth-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 6px 10px;
+  margin-right: 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-left a:hover,
+.auth-links a:hover {
+  background-color: var(--ice-cold);
+  color: var(--purple-pain);
+}
+
+.auth-links {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-links a:last-child {
+  margin-right: 0;
+}
+
+
+/* Login Section */
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: var(--freeze-purple);
+  padding: 40px 20px;
+}
+
+.login-container {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-container h1 {
+  color: var(--purple-pain);
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.login-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  color: var(--heavy-purple);
+  font-weight: 600;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--medium-purple);
+  border-radius: 8px;
+  background-color: var(--freeze-purple);
+  font-size: 1rem;
+}
+
+.login-container button {
+  background-color: var(--purple-pain);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: var(--heavy-purple);
+}
+
+.login-container p {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.login-container a {
+  color: var(--purple-pain);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+/* OR Divider */
+.or-divider {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: var(--heavy-purple);
+}
+
+
+/* Signup Section */
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: var(--e5eaf5);
+  padding: 40px 20px;
+}
+
+.signup-container {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.signup-container h1 {
+  color: var(--medium-purple);
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.signup-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  color: var(--heavy-purple);
+  font-weight: 600;
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--medium-purple);
+  border-radius: 8px;
+  background-color: var(--freeze-purple);
+  font-size: 1rem;
+}
+
+.signup-container button {
+  background-color: var(--medium-purple);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.signup-container button:hover {
+  background-color: var(--purple-pain);
+}
+
+.signup-container p {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.signup-container a {
+  color: var(--purple-pain);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-container a:hover {
+  text-decoration: underline;
+}
+
+/* OR Divider */
+.or-divider {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: var(--heavy-purple);
+}
+
+/* Hero Section */
+.hero {
+  background: url('/images/hero-bg.jpg') center/cover no-repeat;
+  height: 60vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero .overlay {
+  background-color: rgba(132, 88, 179, 0.7); /* Purple Pain with opacity */
+  color: white;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 80%;
+  margin-top: 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* Featured Books Section */
+.featured-books {
+  padding: 60px 20px;
+  background-color: var(--freeze-purple);
+  text-align: center;
+}
+
+.featured-books h2 {
+  color: var(--purple-pain);
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+/* Book Grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.book {
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.book img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.book p {
+  color: var(--heavy-purple);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* About Section */
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 30px;
+  background-color: var(--freeze-purple);
+}
+
+.about-content {
+  flex: 1 1 400px;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.about-content h1 {
+  color: var(--purple-pain);
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  color: var(--heavy-purple);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.about-content strong {
+  color: var(--purple-pain);
+}
+
+.about-image {
+  flex: 1 1 300px;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Create Post Section */
+.create-post {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #f7f7fb;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Heading */
+.create-post h1 {
+  text-align: center;
+  color: #8458B3; /* Purple Pain */
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+/* Labels */
+.create-post label {
+  display: block;
+  margin-top: 20px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Inputs and Textarea */
+.create-post input[type="text"],
+.create-post textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+  background-color: #fff;
+}
+
+.create-post input:focus,
+.create-post textarea:focus {
+  border-color: #a0d2eb; /* Ice Cold */
+  outline: none;
+}
+
+/* Button */
+.create-post button {
+  margin-top: 30px;
+  width: 100%;
+  padding: 12px;
+  background-color: #8458B3; /* Purple Pain */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-post button:hover {
+  background-color: #a28089; /* Heavy Purple */
+}
+
+/* Blog Main Section */
+.blog {
+  padding: 60px 30px;
+  background-color: var(--e5eaf5); /* Freeze Purple */
+}
+
+.blog h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--purple-pain);
+  margin-bottom: 40px;
+  margin-top: -30px;
+  margin-bottom: -30px;
+}
+
+/* Section Headings */
+.blog-section h2 {
+  font-size: 1.8rem;
+  color: var(--heavy-purple);
+  margin-top: 100px;
+  text-align: left;
+}
+
+/* Book Grid Layout */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* Book Cards */
+.book-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+.book-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.book-card h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #8458B3;
+}
+
+/* Style for post content */
+.book-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  overflow-wrap: break-word;   
+  word-break: break-word;     
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make sure text also wraps inside paragraphs */
+.book-card p {
+  white-space: pre-wrap;       
+  word-break: break-word;    
+  overflow-wrap: break-word;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+
+/* Optional: Style delete button */
+.delete-btn {
+  margin-top: 10px;
+  background-color: #a28089;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+  background-color: #8458B3;
+}
+
+/* Footer Styling */
+footer {
+  background-color: var(--purple-pain);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.95rem;
+  margin-top: 60px;
+  border-top: 5px solid var(--medium-purple);
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  margin: 0;
+  letter-spacing: 0.5px;
+}

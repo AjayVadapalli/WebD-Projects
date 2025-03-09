@@ -1,0 +1,25 @@
+<%- include("header") %>
+
+<section class="create-post">
+  <h1>Create a New Post</h1>
+
+  <form action="/create" method="POST">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" required>
+  
+    <label for="content">Content</label>
+    <textarea id="content" name="content" rows="5" required></textarea>
+  
+    <button type="submit">Create Post</button>
+  </form>
+</section>
+
+<script>
+  document.getElementById("postForm").addEventListener("submit", (e) => {
+    setTimeout(() => {
+      window.location.href = "/blog";
+    }, 1000);
+  });
+</script>
+
+<%- include("footer") %>

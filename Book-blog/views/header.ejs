@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/css/styles.css">
+
+<header>
+  <nav>
+    <div class="nav-left">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/create">Create Post</a>
+    </div>
+
+    <div class="auth-links">
+      <% if (session.userId) { %>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+      <% } %>
+    </div>
+  </nav>
+</header>
