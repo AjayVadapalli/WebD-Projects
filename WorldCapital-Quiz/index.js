@@ -1,7 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
 import dotenv from "dotenv";
+import pkg from 'pg';
+const { Pool } = pkg;
 
 // Load environment variables
 dotenv.config();
@@ -9,14 +10,24 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
-db.connect();
+
+// Test the connection by running a simple query
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('Error connecting to the Neon database:', err);
+  } else {
+    console.log('Connected! Server time:', res.rows[0]);
+  }
+});
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 let quiz = [
   { country: "France", capital: "Paris" },
@@ -24,20 +35,15 @@ let quiz = [
   { country: "United States of America", capital: "New York" },
 ];
 
-db.query("SELECT * FROM capitals", (err, res) => {
+pool.query("SELECT * FROM capitals", (err, res) => {
   if (err) {
     console.error(err.stack);
   }else{
     quiz=res.rows;
   }
-  db.end();
 });
 
 let totalCorrect = 0;
-
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
 
 let currentQuestion = {};
 
