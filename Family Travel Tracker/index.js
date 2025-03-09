@@ -1,7 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
 import dotenv from "dotenv";
+import pkg from 'pg';
+const { Pool } = pkg;
+
 
 // Load environment variables
 dotenv.config();
@@ -9,15 +11,21 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-const db = new pg.Client({
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false, // Required for Render PostgreSQL
+    rejectUnauthorized: false,
   },
 });
-db.connect()
-.then(() => console.log("Connected to PostgreSQL"))
-.catch((err) => console.error("Database connection error:", err.stack));
+
+// Test the connection by running a simple query
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('Error connecting to the Neon database:', err);
+  } else {
+    console.log('Connected! Server time:', res.rows[0]);
+  }
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -30,21 +38,23 @@ let users = [
 ];
 
 async function checkVisited() {
-  const result = await db.query(
-    "SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1; ",
+  const result = await pool.query(
+    "SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1;",
     [currentUserId]
-);
+  );
   let countries = [];
   result.rows.forEach((country) => {
     countries.push(country.country_code);
   });
   return countries;
 }
+
 async function getCurrentUser() {
-  const result = await db.query("SELECT * FROM users");
+  const result = await pool.query("SELECT * FROM users");
   users = result.rows;
   return users.find((user) => user.id == currentUserId);
 }
+
 app.get("/", async (req, res) => {
   const countries = await checkVisited();
   const currentUser = await getCurrentUser();
@@ -55,12 +65,13 @@ app.get("/", async (req, res) => {
     color: currentUser.color,
   });
 });
+
 app.post("/add", async (req, res) => {
   const input = req.body["country"];
   const currentUser = await getCurrentUser();
 
   try {
-    const result = await db.query(
+    const result = await pool.query(
       "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
       [input.toLowerCase()]
     );
@@ -68,7 +79,7 @@ app.post("/add", async (req, res) => {
     const data = result.rows[0];
     const countryCode = data.country_code;
     try {
-      await db.query(
+      await pool.query(
         "INSERT INTO visited_countries (country_code, user_id) VALUES ($1, $2)",
         [countryCode, currentUserId]
       );
@@ -80,6 +91,7 @@ app.post("/add", async (req, res) => {
     console.log(err);
   }
 });
+
 app.post("/user", async (req, res) => {
   if (req.body.add === "new") {
     res.render("new.ejs");
@@ -90,12 +102,10 @@ app.post("/user", async (req, res) => {
 });
 
 app.post("/new", async (req, res) => {
-  //Hint: The RETURNING keyword can return the data that was inserted.
-  //https://www.postgresql.org/docs/current/dml-returning.html
   const name = req.body.name;
   const color = req.body.color;
 
-  const result = await db.query(
+  const result = await pool.query(
     "INSERT INTO users (name, color) VALUES($1, $2) RETURNING *;",
     [name, color]
   );
