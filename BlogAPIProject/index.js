@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 const app = express();
-const port = 4000;
+const port = 3000;
 
 // In-memory data store
 let posts = [
@@ -39,6 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Write your code here//
+
 
 //CHALLENGE 1: GET All posts
 app.get("/posts", (req, res) => {
