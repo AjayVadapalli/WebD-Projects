@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="movie-details-container">
+  <h2><%= movie.Title %> (<%= movie.Year %>)</h2>
+  <img src="<%= movie.Poster !== 'N/A' ? movie.Poster : '/images/noPoster.webp' %>" alt="Poster">
+  
+  <p><strong>Genre:</strong> <%= movie.Genre %></p>
+  <p><strong>Director:</strong> <%= movie.Director %></p>
+  <p><strong>Plot:</strong> <%= movie.Plot %></p>
+  <p><strong>Rating:</strong> <%= movie.imdbRating %>/10</p>
+  <p><strong>Runtime:</strong> <%= movie.Runtime %></p>
+  <p><strong>Released:</strong> <%= movie.Released %></p>
+</div>
+
+<%- include('partials/footer') %>

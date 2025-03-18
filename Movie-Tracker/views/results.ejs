@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<h2>Search Results</h2>
+<ul>
+  <% movies.forEach(movie => { %>
+    <li>
+      <strong><%= movie.title %></strong> (<%= movie.release_date %>)
+      <a href="/movie/<%= movie.id %>">View</a>
+      <form action="/add/<%= movie.id %>" method="POST">
+        <button type="submit">Add to Watchlist</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
+
+<%- include('partials/footer') %>

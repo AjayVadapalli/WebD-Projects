@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="home-container">
+  <h2>Featured Movies</h2>
+
+  <% if (movies.length > 0) { %>
+    <ul class="movie-list">
+      <% movies.forEach(movie => { %>
+        <li class="movie-item">
+          <a href="/movie/<%= movie.imdbID %>">
+            <img src="<%= movie.Poster !== 'N/A' ? movie.Poster : '/images/noPoster.webp' %>" alt="<%= movie.Title %> Poster" />
+          </a>
+          <div>
+            <h3><%= movie.Title %> (<%= movie.Year %>)</h3>
+
+            <% if (user) { %>
+              <form action="/add-to-watchlist" method="POST">
+                <input type="hidden" name="imdbID" value="<%= movie.imdbID %>" />
+                <input type="hidden" name="title" value="<%= movie.Title %>" />
+                <input type="hidden" name="year" value="<%= movie.Year %>" />
+                <input type="hidden" name="poster" value="<%= movie.Poster %>" />
+                <button type="submit">Add to Watchlist</button>
+              </form>
+            <% } else { %>
+              <a href="/login" class="login-prompt">Login to add to watchlist</a>
+            <% } %>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No movies found.</p>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

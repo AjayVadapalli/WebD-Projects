@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="dashboard-container">
+  <h2>Your Watchlist</h2>
+
+  <% if (watchlist.length > 0) { %>
+    <ul class="movie-list">
+      <% watchlist.forEach(movie => { %>
+        <li class="movie-item">
+          <a href="/movie/<%= movie.imdbID %>">
+            <img src="<%= movie.poster !== 'N/A' ? movie.poster : '/images/placeholder.jpg' %>" alt="<%= movie.title %> Poster" />
+          </a>
+          <div>
+            <h3><%= movie.title %> (<%= movie.year %>)</h3>
+            <form action="/mark-watched" method="POST">
+              <input type="hidden" name="imdbID" value="<%= movie.imdbID %>" />
+              <input type="hidden" name="title" value="<%= movie.title %>" />
+              <input type="hidden" name="poster" value="<%= movie.poster %>" />
+              <button type="submit">Mark as Watched</button>
+            </form>
+            
+            <form action="/remove" method="POST">
+              <input type="hidden" name="imdbID" value="<%= movie.imdbID %>" />
+              <button type="submit">Remove</button>
+            </form>
+            
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>Your watchlist is empty.</p>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

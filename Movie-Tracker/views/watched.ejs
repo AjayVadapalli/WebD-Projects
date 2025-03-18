@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="dashboard-container">
+  <h2>Your Watched Movies</h2>
+
+  <% if (watched.length === 0) { %>
+    <p>You haven’t watched any movies yet!</p>
+  <% } else { %>
+    <ul class="movie-list">
+      <% watched.forEach(movie => { %>
+        <li class="movie-item">
+          <a href="/movie/<%= movie.imdbID %>">
+            <img src="<%= movie.poster !== 'N/A' ? movie.poster : '/images/placeholder.jpg' %>" alt="<%= movie.title %> Poster">
+          </a>
+          <div>
+            <h3><%= movie.title %></h3>
+            <% if (movie.rating) { %>
+              <p>Rated: <%= movie.rating %>/10</p>
+            <% } %>
+            <form action="/remove-watched" method="POST">
+              <input type="hidden" name="imdbID" value="<%= movie.imdbID %>" />
+              <button type="submit">Remove</button>
+            </form>
+      
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>
