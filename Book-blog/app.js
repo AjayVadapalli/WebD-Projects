@@ -18,7 +18,6 @@ app.use(
   })
 );
 
-// Store session globally
 app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
@@ -76,7 +75,6 @@ app.post("/login", async (req, res) => {
     const userDoc = snapshot.docs[0];
     const userData = userDoc.data();
 
-    // Compare hashed passwords
     const isMatch = await bcrypt.compare(password, userData.password);
     if (!isMatch) {
       return res.status(400).send("Incorrect password");
@@ -98,7 +96,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.post("/create", requireAuth, async (req, res) => {
-  console.log("Received form data:", req.body); // Check what is being received
+  console.log("Received form data:", req.body); 
 
   const { title, content } = req.body;
   if (!title || !content) {
@@ -125,8 +123,8 @@ app.post("/delete/:id", requireAuth, async (req, res) => {
   const postId = req.params.id;
   const userId = req.session.userId;
 
-  console.log(`🔍 Attempting to delete post: ${postId}`);
-  console.log(`👤 User trying to delete: ${userId}`);
+  console.log(` Attempting to delete post: ${postId}`);
+  console.log(` User trying to delete: ${userId}`);
 
   try {
     const postRef = db.collection("posts").doc(postId);
